@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acme Shop — @gaiadesk/embed demo</title>
+    <style>
+      body { font: 16px/1.5 system-ui, sans-serif; margin: 0; background: #f6f7f9; color: #1b1f29; }
+      header { background: #0f766e; color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+      main { max-width: 640px; margin: 32px auto; background: #fff; border-radius: 12px; padding: 24px; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+      label { display: block; margin: 12px 0 4px; font-weight: 600; }
+      input { width: 100%; box-sizing: border-box; padding: 9px 10px; border: 1px solid #cfd5e0; border-radius: 8px; font: inherit; }
+      button { font: 600 15px system-ui, sans-serif; border-radius: 8px; padding: 10px 16px; border: 0; cursor: pointer; }
+      #help { background: #fff; color: #0f766e; }
+      #pay { background: #0f766e; color: #fff; margin-top: 18px; }
+      .card { padding: 12px; border: 1px dashed #cfd5e0; border-radius: 8px; margin-top: 12px; }
+      #log { font: 13px ui-monospace, monospace; white-space: pre-wrap; color: #555; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>Acme Shop</strong>
+      <button id="help" type="button">Get help</button>
+    </header>
+    <main>
+      <h1>Checkout</h1>
+      <label for="name">Name on the order</label>
+      <input id="name" type="text" autocomplete="name" />
+      <label for="email">Email</label>
+      <input id="email" type="email" />
+      <label for="password">Account password (always hidden from support)</label>
+      <input id="password" type="password" />
+      <!-- Anything marked data-gaiadesk-mask is painted over in what support sees. -->
+      <div class="card" data-gaiadesk-mask>
+        <label for="card">Card number (hidden from support)</label>
+        <input id="card" inputmode="numeric" />
+      </div>
+      <button id="pay" type="button">Pay</button>
+      <p id="log"></p>
+    </main>
+
+    <!-- The <script> build: defines the global GaiaDeskEmbed. -->
+    <script src="../dist/gaiadesk-embed.min.js"></script>
+    <script type="module">
+      // Run it: `npm run build`, serve this folder's parent over http(s), and
+      // open demo/index.html?server=https://gaiadesk.net&pk=ak_… (a publishable
+      // key registered for this origin) — or &token=gdemb_… (an embed token
+      // your backend got from POST /v1/support/sessions).
+      const q = new URLSearchParams(location.search);
+      const log = (s) => (document.getElementById("log").textContent += s + "\n");
+      document.getElementById("pay").addEventListener("click", () => log("Pay clicked"));
+      document.getElementById("help").addEventListener("click", () => {
+        const auth = q.get("token") ? { embedToken: q.get("token") } : { publishableKey: q.get("pk") ?? "" };
+        const help = GaiaDeskEmbed.start({
+          ...auth,
+          server: q.get("server") ?? undefined,
+          mode: q.get("mode") === "view" ? "view" : "cobrowse",
+          customer: { name: "Ada Lovelace", account: "acme-4411" },
+          branding: { name: "Acme", color: "#0f766e" },
+        });
+        help.on("state", ({ state }) => log(`state: ${state}`));
+        help.on("ready", ({ joinCode }) => log(`support code: ${joinCode}`));
+        help.on("joined", ({ agent }) => log(`joined: ${agent ?? "an agent"}`));
+        help.on("action", (a) => log(`agent ${a.type}: ${a.applied ? "applied" : "refused (" + a.reason + ")"}`));
+        help.on("error", (e) => log(`error: ${e.code} ${e.message}`));
+        help.on("ended", ({ reason }) => log(`ended: ${reason}`));
+      });
+    </script>
+  </body>
+</html>

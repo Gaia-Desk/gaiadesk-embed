@@ -1,0 +1,54 @@
+{
+  "name": "@gaiadesk/embed",
+  "version": "0.1.0",
+  "description": "A \"Get help\" button for your web app: your customer shares their browser tab with your support team on GaiaDesk, who can see it and, if you allow it, guide it inside the page. TypeScript, zero runtime dependencies, ESM and a <script> build.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/gaiadesk-embed.min.js",
+  "jsdelivr": "./dist/gaiadesk-embed.min.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./script": "./dist/gaiadesk-embed.min.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "npm run clean && tsc -p tsconfig.json && node scripts/bundle.mjs",
+    "build:test": "tsc -p tsconfig.test.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json --noEmit",
+    "clean": "node -e \"for (const d of ['dist', 'dist-test']) require('node:fs').rmSync(d, { recursive: true, force: true })\"",
+    "test": "npm run build && npm run build:test && node --test dist-test/cobrowse.test.js dist-test/mask.test.js dist-test/capture.test.js dist-test/ui.test.js dist-test/session.test.js dist-test/package.test.js",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^20.14.0",
+    "esbuild": "^0.24.0",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gaia-Desk/gaiadesk-embed.git"
+  },
+  "homepage": "https://github.com/Gaia-Desk/gaiadesk-embed#readme",
+  "bugs": {
+    "url": "https://github.com/Gaia-Desk/gaiadesk-embed/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": ["gaiadesk", "support", "co-browsing", "cobrowse", "screen-share", "help-desk", "webrtc", "embed"]
+}
