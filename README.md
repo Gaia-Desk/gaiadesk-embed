@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/Gaia-Desk/gaiadesk-embed/actions/workflows/ci.yml/badge.svg)](https://github.com/Gaia-Desk/gaiadesk-embed/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/@gaiadesk/embed)](https://www.npmjs.com/package/@gaiadesk/embed)
+[![Release](https://img.shields.io/github/v/release/Gaia-Desk/gaiadesk-embed)](https://github.com/Gaia-Desk/gaiadesk-embed/releases/latest)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
 A **"Get help" button for your web app**: in-app remote support and customer support co-browsing
