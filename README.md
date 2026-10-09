@@ -1,8 +1,13 @@
 # @gaiadesk/embed
 
-A **"Get help" button for your web app**. Your customer clicks it and agrees; their browser tab is
-shared with **your** support team, who see it in the GaiaDesk console and, if you allow it, guide
-it: point, highlight, scroll, click and type **inside your page only**.
+[![CI](https://github.com/Gaia-Desk/gaiadesk-embed/actions/workflows/ci.yml/badge.svg)](https://github.com/Gaia-Desk/gaiadesk-embed/actions/workflows/ci.yml)
+[![npm](https://img.shields.io/npm/v/@gaiadesk/embed)](https://www.npmjs.com/package/@gaiadesk/embed)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+A **"Get help" button for your web app**: in-app remote support and customer support co-browsing
+for any web page, as a TypeScript screen sharing SDK. Your customer clicks it and agrees; their
+browser tab is shared with **your** support team, who see it in the GaiaDesk console and, if you
+allow it, guide it: point, highlight, scroll, click and type **inside your page only**.
 
 - TypeScript, **zero runtime dependencies**, ESM and a `<script>` build.
 - The browser's own share prompt (`getDisplayMedia`) plus an in-page consent dialog in your
@@ -16,6 +21,8 @@ it: point, highlight, scroll, click and type **inside your page only**.
 ```sh
 npm install @gaiadesk/embed
 ```
+
+Or without a bundler, from jsDelivr (see [`<script>` tag](#script-tag)).
 
 ## Quick start
 
@@ -145,6 +152,13 @@ npm run typecheck
 
 `demo/index.html` is a small shop page with a "Get help" button: build, serve the repository root,
 and open `demo/index.html?server=https://gaiadesk.net&pk=ak_…` (or `&token=gdemb_…`).
+
+## Links
+
+- npm: [@gaiadesk/embed](https://www.npmjs.com/package/@gaiadesk/embed)
+- Guide: [Embedding GaiaDesk](https://gaiadesk.net/docs/embedding-gaiadesk) on gaiadesk.net
+- Embed SDKs: [Web](https://github.com/Gaia-Desk/gaiadesk-embed) · [Electron](https://github.com/Gaia-Desk/gaiadesk-embed-electron) · [macOS (Swift)](https://github.com/Gaia-Desk/gaiadesk-embed-swift) · [C/C++ and Qt](https://github.com/Gaia-Desk/gaiadesk-embed-cpp) · [.NET](https://github.com/Gaia-Desk/gaiadesk-embed-dotnet) · [iOS](https://github.com/Gaia-Desk/gaiadesk-embed-ios) · [Android](https://github.com/Gaia-Desk/gaiadesk-embed-android) · [React Native](https://github.com/Gaia-Desk/gaiadesk-embed-react-native) · [Flutter](https://github.com/Gaia-Desk/gaiadesk-embed-flutter)
+- [Changelog](CHANGELOG.md) · [Security policy](https://github.com/Gaia-Desk/.github/blob/main/SECURITY.md)
 
 ## License
 
